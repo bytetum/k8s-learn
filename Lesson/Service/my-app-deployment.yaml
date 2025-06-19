@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-echo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo 
+    spec:
+      containers:
+        - name: echo-container
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello from my Pod!" # Custom text to display
+            - "-listen=:5678" # The app will listen on port 5678
+          ports:
+            - containerPort: 5678

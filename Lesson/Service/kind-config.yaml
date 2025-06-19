@@ -1,0 +1,10 @@
+# kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    # This is the crucial part that maps the NodePort to your host
+    extraPortMappings:
+      - containerPort: 30007 # The port on the "node" (the kind container)
+        hostPort: 30007      # The port on your local machine (the host)
+        protocol: TCP
